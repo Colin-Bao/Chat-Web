@@ -19,9 +19,9 @@
 
 
 <div class="container-fluid">
-    <h1>小熊的店员大全</h1>持续更新中...
-
-    <br>
+    <h1>小熊的店员大全</h1>
+    糖恋树洞、天空猫的树洞、清欢树洞、橘色灯罩、持续更新中...
+    <br><br>
     <!-- Search form -->
     <form method="POST">
         <input type="text" name="search_query" placeholder="Search">
@@ -66,7 +66,7 @@
                 <!-- 照片墙 -->
                 <td>
                     <a href="{{ user.user_url }}" target="_blank">
-                        <img src="{{ user.user_image_paths[0] }}" alt="{{ user.user_name }}" width="100">
+                        <img src="{{ user.user_img }}" alt="{{ user.user_name }}" width="100">
                     </a>
                 </td>
                 <!-- 位置 -->
@@ -83,7 +83,7 @@
                         <source src="{{ user.user_audio_url }}" type="audio/mpeg">
                     </audio>
                 </td>
-                <td width="5%">{{ user.source_name }}</td>
+                <td width="3%">{{ user.source_name }}</td>
             </tr>
         {% endfor %}
         </tbody>
