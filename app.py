@@ -12,11 +12,13 @@ def hello_world():  # put application's code here
 def index():  # put application's code here
     # Get the search query from the form
     search_query = request.form.get('search_query')
-
     # 导入数据
     import pandas as pd
-    DS_PATH = '/Users/colin/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/Chat-Analysis/DataSets/2023-Escort'
-    df = pd.read_csv(f'{DS_PATH}/dbs/user_card_all.csv')
+    import os
+    # 获取当前文件所在的目录
+    # ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../"))
+    # DS_PATH = f'{ROOT_PATH}/DataSets/2023-Escort'
+    df = pd.read_csv(f'/home/ubuntu/PycharmProjects/Chat-Analysis/DataSets/2023-Escort/dbs/user_card_all.csv')
 
     # 搜索框
     if search_query:

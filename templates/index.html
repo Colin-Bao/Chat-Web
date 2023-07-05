@@ -19,7 +19,9 @@
 
 
 <div class="container-fluid">
-    <h1>小熊的店员大全</h1>
+    <a href="/">
+        <h1>小熊的店员大全</h1>
+    </a>
     糖恋树洞、天空猫的树洞、清欢树洞、橘色灯罩、持续更新中...
     <br><br>
     <!-- Search form -->
@@ -50,9 +52,9 @@
             <th>排名</th>
             <th>姓名</th>
             <th>照片墙</th>
-            <th>user_position</th>
-            <th>user_tag</th>
-            <th>user_profile</th>
+            <th>位置</th>
+            <th>标签</th>
+            <th>个人签名</th>
             <th>服务</th>
             <th>声音</th>
             <th>来源</th>
@@ -61,7 +63,7 @@
         <tbody>
         {% for user in users %}
             <tr>
-                <td >{{ user.user_rank }}</td>
+                <td>{{ user.user_rank }}</td>
                 <td>{{ user.user_name }}</td>
                 <!-- 照片墙 -->
                 <td>
