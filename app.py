@@ -56,7 +56,7 @@ def index():
     page = request.args.get('page', 1, type=int)
 
     # Use paginate function to get the users to display and total pages
-    pagination_info = paginate(users, page, 30, 15)
+    pagination_info = paginate(users, page, 30, 10)
 
     return render_template('index.html', users=pagination_info['items'], **pagination_info)
 
