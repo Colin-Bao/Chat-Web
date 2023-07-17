@@ -43,9 +43,8 @@ def paginate(data, page, per_page=30, page_display=15):
     return {'items': data_to_display, 'total_pages': total_pages, 'page': page, 'page_range': page_range}
 
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-
+@app.route('/old', methods=['GET', 'POST'])
+def index_old():
     # Get the search query from the form
     search_query = request.form.get('search_query')
 
@@ -60,6 +59,16 @@ def index():
     pagination_info = paginate(users, page, 30, 10)
 
     return render_template('index.html', users=pagination_info['items'], **pagination_info)
+
+
+@app.route('/')
+def index():
+    users = [
+            {'name': '用户1', 'module': '功能模块1'},
+            {'name': '用户2', 'module': '功能模块2'},
+            # 添加更多用户...
+    ]
+    return render_template('home.html', users=users)
 
 
 if __name__ == '__main__':
