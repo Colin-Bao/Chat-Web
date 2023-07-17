@@ -45,6 +45,7 @@ def paginate(data, page, per_page=30, page_display=15):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+
     # Get the search query from the form
     search_query = request.form.get('search_query')
 
