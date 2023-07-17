@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import pandas as pd
+from faker import Faker
 
 app = Flask(__name__)
 
@@ -62,16 +63,12 @@ def index_old():
 
 @app.route('/')
 def index():
-    from faker import Faker
     fake = Faker('zh_CN')
-    # 使用Faker随机创建100个员工列表 属性为有position,name,rank,tag,profile,service,grade
+    # 随机创建100个员工列表
     users = [{'img': fake.image_url(), 'name': fake.name(), 'position': fake.city(), 'tag': fake.job(), 'profile': fake.address(),
               'service': fake.company()} for _
-             in range(100)]
-
-    # users = [{'name': fake.name(), 'age': fake.job()} for _ in range(100)]
-    # 导入fake包
-
+             in range(10)]
+    # users = [{'name': 'test'}, {'name': 'test2'}]
     return render_template('index.html', users=users)
 
 

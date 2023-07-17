@@ -1,45 +1,60 @@
 {% block usertable_content %}
     <thead class="thead-dark">
     <tr class="row table_top_color">
-        <th class="col text-center">Folio</th>
-        <th class="col text-center">Estado</th>
-        <th class="col text-center">Tipo de Doc</th>
-        <th class="col text-center">Remitente</th>
-        <th class="col text-center">Asunto</th>
-        <th class="col text-center">Tema</th>
-        <th class="col text-center filter-false sorter-false">acción</th>
+        <th class="col-1 text-center" style="padding-left: 35px;">NAME</th>
+        <th class="col-1 text-center">VOLICE</th>
+        <th class="col-1 text-center">POSITION</th>
+        <th class="col-1 text-center">Remitente</th>
+        <th class="col-3 text-center">Asunto</th>
+        <th class="col-3 text-center">Tema</th>
+        <th class="col-2 text-center filter-false sorter-false">ASSETS</th>
     </tr>
     </thead>
     <tbody class="text-center">
     <tr></tr>
     {% for user in users %}
         <tr class="row">
-            <td class="col align-items-md-center justify-content-md-center d-md-flex"><img class="rounded-circle me-2" width="30" height="30"
-                                 src="{{ user.img }}">
-                {{ user.name }}
-            </td>
-            <td class="col"><p data-bs-toggle="tooltip" data-bss-tooltip="" title="Ya descargado"><i class="fas fa-check text-info"></i>
-            </p>
-                <p data-bs-toggle="tooltip" data-bss-tooltip="" title="No ha sido atendido"><i
-                        class="far fa-window-close text-danger"></i></p>
-                <p data-bs-toggle="tooltip" data-bss-tooltip="" title="Requiere validación"><i
-                        class="fas fa-pause text-warning"></i></p></td>
-            <td class="col align-items-md-center justify-content-md-center d-md-flex">{{ user.position }}</td>
-            <td class="col align-items-md-center justify-content-md-center d-md-flex">{{ user.tag }}</td>
-            <td class="col align-items-md-center justify-content-md-center d-md-flex">{{ user.profile }}</td>
-            <td class="col align-items-md-center justify-content-md-center d-md-flex">{{ user.service }}</td>
-            <td class="col align-items-md-center justify-content-md-center d-md-flex">
-                <a class="btn btn-dark btnMaterial btn-flat primary semicircle" role="button" data-bs-toggle="tooltip"
-                   data-bss-tooltip="" href="attach-document.html" title="Adjuntar archivo"><i
-                        class="fas fa-paperclip text-warning"></i>
-                </a>
-                <a class="btn btnMaterial btn-flat primary semicircle"
-                   role="button" data-bs-toggle="tooltip"
-                   data-bss-tooltip="" href="show.html"
-                   title="Ver detalles"><i class="far fa-eye"></i>
-                </a>
+            <td class="col-1 align-items-md-center justify-content-md-center d-md-flex">
+                <div style="margin-left: 30px;margin-top: 10px">
+                    <img class="rounded-circle me-2" width="80px" height="80px" style="margin-right: 0px !important;" src="{{ user.img }}">
+                    <div style="margin-top: 10px">{{ user.name }}</div>
+                </div>
 
             </td>
+
+            <td class="col-1 ">
+                <p data-bs-toggle="tooltip" data-bss-tooltip="" title="Ya descargado"><i class="fas fa-check text-info"></i>
+                </p>
+                <p data-bs-toggle="tooltip" data-bss-tooltip="" title="No ha sido atendido"><i class="far fa-window-close text-danger"></i>
+                </p>
+                <p data-bs-toggle="tooltip" data-bss-tooltip="" title="Requiere validación"><i class="fas fa-pause text-warning"></i>
+                </p>
+
+            </td>
+
+            <td class="col-1 align-items-md-center justify-content-md-center d-md-flex">{{ user.position }}</td>
+            <td class="col-1 align-items-md-center justify-content-md-center d-md-flex">{{ user.tag }}</td>
+            <td class="col-3 align-items-md-center justify-content-md-center d-md-flex">{{ user.profile }}</td>
+            <td class="col-3 align-items-md-center justify-content-md-center d-md-flex">{{ user.service }}</td>
+            <td class="col-2  align-items-md-center justify-content-md-center d-md-flex">
+
+                <a class="btn btn-dark btnMaterial btn-flat primary semicircle" role="button" data-bs-toggle="tooltip"
+                   href="attach-document.html" title="Adjuntar archivo"><i class="fas fa-paperclip text-warning"></i></a>
+
+
+                <a class="btn btnMaterial btn-flat success semicircle" role="button" data-bs-toggle="tooltip" href="finish-document.html"
+                   title="Descargar"><i class="fas fa-check text-info"></i></a>
+
+
+                <a class="btn btnMaterial btn-flat success semicircle" role="button" data-bs-toggle="tooltip" href="create-document.html"
+                   title="Editar"><i class="fas fa-pen"></i></a>
+
+                <a class="btn btnMaterial btn-flat success semicircle" role="button" data-bs-toggle="tooltip" title="Turnar"><i
+                        class="fas fa-undo"></i></a>
+
+
+            </td>
+
         </tr>
     {% endfor %}
     </tbody>
