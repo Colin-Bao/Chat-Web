@@ -68,7 +68,7 @@ def index():
     users = [{'img': fake.image_url(), 'name': fake.name(), 'position': fake.city(), 'tag': fake.job(), 'profile': fake.address(),
               'service': fake.company()} for _
              in range(10)]
-    # users = [{'name': 'test'}, {'name': 'test2'}]
+    # users = [{'name': 'test'}, {'name': 'test2'}]s
     return render_template('index.html', users=users)
 
 
