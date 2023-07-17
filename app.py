@@ -57,18 +57,22 @@ def index_old():
 
     # Use paginate function to get the users to display and total pages
     pagination_info = paginate(users, page, 30, 10)
-
     return render_template('index.html', users=pagination_info['items'], **pagination_info)
 
 
 @app.route('/')
 def index():
-    users = [
-            {'name': '用户1', 'module': '功能模块1'},
-            {'name': '用户2', 'module': '功能模块2'},
-            # 添加更多用户...
-    ]
-    return render_template('home.html', users=users)
+    from faker import Faker
+    fake = Faker('zh_CN')
+    # 使用Faker随机创建100个员工列表 属性为有position,name,rank,tag,profile,service,grade
+    users = [{'img': fake.image_url(), 'name': fake.name(), 'position': fake.city(), 'tag': fake.job(), 'profile': fake.address(),
+              'service': fake.company()} for _
+             in range(100)]
+
+    # users = [{'name': fake.name(), 'age': fake.job()} for _ in range(100)]
+    # 导入fake包
+
+    return render_template('index.html', users=users)
 
 
 if __name__ == '__main__':

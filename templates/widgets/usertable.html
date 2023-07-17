@@ -1,0 +1,46 @@
+{% block usertable_content %}
+    <thead class="thead-dark">
+    <tr class="row table_top_color">
+        <th class="col text-center">Folio</th>
+        <th class="col text-center">Estado</th>
+        <th class="col text-center">Tipo de Doc</th>
+        <th class="col text-center">Remitente</th>
+        <th class="col text-center">Asunto</th>
+        <th class="col text-center">Tema</th>
+        <th class="col text-center filter-false sorter-false">acción</th>
+    </tr>
+    </thead>
+    <tbody class="text-center">
+    <tr></tr>
+    {% for user in users %}
+        <tr class="row">
+            <td class="col align-items-md-center justify-content-md-center d-md-flex"><img class="rounded-circle me-2" width="30" height="30"
+                                 src="{{ user.img }}">
+                {{ user.name }}
+            </td>
+            <td class="col"><p data-bs-toggle="tooltip" data-bss-tooltip="" title="Ya descargado"><i class="fas fa-check text-info"></i>
+            </p>
+                <p data-bs-toggle="tooltip" data-bss-tooltip="" title="No ha sido atendido"><i
+                        class="far fa-window-close text-danger"></i></p>
+                <p data-bs-toggle="tooltip" data-bss-tooltip="" title="Requiere validación"><i
+                        class="fas fa-pause text-warning"></i></p></td>
+            <td class="col align-items-md-center justify-content-md-center d-md-flex">{{ user.position }}</td>
+            <td class="col align-items-md-center justify-content-md-center d-md-flex">{{ user.tag }}</td>
+            <td class="col align-items-md-center justify-content-md-center d-md-flex">{{ user.profile }}</td>
+            <td class="col align-items-md-center justify-content-md-center d-md-flex">{{ user.service }}</td>
+            <td class="col align-items-md-center justify-content-md-center d-md-flex">
+                <a class="btn btn-dark btnMaterial btn-flat primary semicircle" role="button" data-bs-toggle="tooltip"
+                   data-bss-tooltip="" href="attach-document.html" title="Adjuntar archivo"><i
+                        class="fas fa-paperclip text-warning"></i>
+                </a>
+                <a class="btn btnMaterial btn-flat primary semicircle"
+                   role="button" data-bs-toggle="tooltip"
+                   data-bss-tooltip="" href="show.html"
+                   title="Ver detalles"><i class="far fa-eye"></i>
+                </a>
+
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+{% endblock %}

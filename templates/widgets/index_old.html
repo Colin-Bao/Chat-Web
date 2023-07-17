@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>小熊的店员大全</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <style>
+        .container-fluid {
+            padding: 1% 1% !important;
+            margin: 0 !important;
+        }
+
+        .container-fluid table {
+            width: 100% !important;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            overflow: auto;
+        }
+
+        {# 跳转按钮 #}
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 50%;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+            transform: translateX(50%); /* adjust the position to the center */
+        }
+
+
+        .back-to-top:hover {
+            background-color: #444;
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<div class="container-fluid">
+    <a href="/">
+        <h1>小熊的店员大全</h1>
+    </a>
+    糖恋树洞、天空猫的树洞、清欢树洞、橘色灯罩、持续更新中...
+    <br><br>
+    <!-- Search form -->
+    <form method="POST">
+        <input type="text" name="search_query" placeholder="Search">
+        <input type="submit" value="Search">
+    </form>
+    <br>
+
+    <!-- Pagination navigation -->
+    <nav>
+        <ul class="pagination">
+            <li class="page-item {% if page == 1 %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('index', page=1) }}">First</a>
+            </li>
+            <li class="page-item {% if page == 1 %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('index', page=page-1) }}">Previous</a>
+            </li>
+            {% for i in page_range %}
+                {% if loop.first and i != 1 %}
+                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                {% endif %}
+                <li class="page-item {% if page == i %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('index', page=i) }}">{{ i }}</a>
+                </li>
+                {% if loop.last and i != total_pages %}
+                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                {% endif %}
+            {% endfor %}
+            <li class="page-item {% if page == total_pages %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('index', page=page+ 1) }}">Next</a>
+            </li>
+            <li class="page-item {% if page == total_pages %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('index', page=total_pages) }}">Last</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- 跳转按钮 -->
+    <a href="#" class="back-to-top">Back to top</a>
+
+    <!-- Pagination table -->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>排名</th>
+            <th>姓名</th>
+            <th>照片墙</th>
+            <th>标签</th>
+            <th>个人签名</th>
+            <th>服务</th>
+            <th>等级</th>
+            <th>声音</th>
+            <th>来源</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.user_rank }}</td>
+                <td>{{ user.user_name }}</td>
+                <!-- 照片墙 -->
+                <td>
+                    <a href="{{ user.user_url }}" target="_blank">
+                        <img src="{{ user.user_img }}" alt="{{ user.user_name }}" width="100">
+                    </a>
+                </td>
+                <!-- 标签 -->
+                <td >{{ user.user_tag }}</td>
+                <!-- 简介 -->
+                <td >{{ user.user_profile }}</td>
+                <!-- 服务 -->
+                <td>{{ user.user_service }}</td>
+                <td>{{ user.user_grade }}</td>
+                <!-- 音频style="width: 10%;" -->
+                <td >
+                    <audio controls style="width: 100px;">
+                        <source src="{{ user.user_audio_url }}" type="audio/mpeg">
+                    </audio>
+                </td>
+                <td width="3%">{{ user.source_name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <!-- Pagination navigation -->
+    <nav>
+        <ul class="pagination">
+            <li class="page-item {% if page == 1 %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('index', page=1) }}">First</a>
+            </li>
+            <li class="page-item {% if page == 1 %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('index', page=page-1) }}">Previous</a>
+            </li>
+            {% for i in page_range %}
+                {% if loop.first and i != 1 %}
+                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                {% endif %}
+                <li class="page-item {% if page == i %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('index', page=i) }}">{{ i }}</a>
+                </li>
+                {% if loop.last and i != total_pages %}
+                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                {% endif %}
+            {% endfor %}
+            <li class="page-item {% if page == total_pages %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('index', page=page+ 1) }}">Next</a>
+            </li>
+            <li class="page-item {% if page == total_pages %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('index', page=total_pages) }}">Last</a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+</body>
+</html>
+
+<!-- 音频播放 -->
+<script>
+    $(document).ready(function () {
+        $('audio').on('play', function () {
+            var current = this;
+            $('audio').each(function (i, audioElement) {
+                if (audioElement !== current) {
+                    audioElement.pause();
+                }
+            });
+        });
+    });
+</script>
