@@ -10,7 +10,14 @@ def load_and_process_data(search_query=None):
     # 获取当前文件所在的目录
     # ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../"))
     # DS_PATH = f'{ROOT_PATH}/DataSets/2023-Escort'
-    df = pd.read_csv(f'/home/ubuntu/PycharmProjects/Chat-Analysis/DataSets/2023-Escort/dbs/user_card_all.csv')
+    df = pd.read_csv(f'/Users/colin/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/Chat-Analysis/ScrapySpider/playwright_spider/data/user_clean.csv')
+
+    # 指定需要查找的列
+    columns_to_search = ['name', 'Profile', 'tag']
+    target_string = '萝'
+
+    # 使用 apply 和 str.contains 来对指定列进行查找
+    df = df[df[columns_to_search].apply(lambda col: col.astype(str).str.contains(target_string, na=False)).any(axis=1)]
 
     # 搜索框
     if search_query:
@@ -61,15 +68,30 @@ def index_old():
     return render_template('index.html', users=pagination_info['items'], **pagination_info)
 
 
-@app.route('/')
-def index():
+def create_fake():
     fake = Faker('zh_CN')
     # 随机创建100个员工列表
     users = [{'img': fake.image_url(), 'name': fake.name(), 'position': fake.city(), 'tag': fake.job(), 'profile': fake.address(),
-              'service': fake.company()} for _
-             in range(10)]
-    # users = [{'name': 'test'}, {'name': 'test2'}]s
-    return render_template('index.html', users=users)
+              'service': fake.company()} for _ in range(10)]
+    return users
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    # Get the search query from the form
+    search_query = request.form.get('search_query')
+
+    # 导入数据
+    users = load_and_process_data(search_query)
+
+    # 分页
+    # Get the page number from the URL parameters (default to 1 if not present)
+    page = request.args.get('page', 1, type=int)
+
+    # Use paginate function to get the users to display and total pages
+    pagination_info = paginate(users, page, 30, 10)
+
+    return render_template('index.html', users=pagination_info['items'], **pagination_info)
 
 
 if __name__ == '__main__':
