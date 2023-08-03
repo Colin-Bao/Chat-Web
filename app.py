@@ -13,7 +13,6 @@ def load_and_process_data(search_query=None):
     file_path = os.path.join(current_dir, 'data', 'user_clean.csv')
     df = pd.read_csv(file_path)
 
-
     # 指定需要查找的列
     columns_to_search = ['name', 'Profile', 'tag']
     target_string = '萝'
