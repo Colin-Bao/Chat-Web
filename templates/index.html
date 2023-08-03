@@ -252,3 +252,17 @@
 <script src="{{ url_for('static', filename='js/script.min.js') }}"></script>
 </body>
 </html>
+
+<!-- 音频播放 -->
+<script>
+    $(document).ready(function () {
+        $('audio').on('play', function () {
+            var current = this;
+            $('audio').each(function (i, audioElement) {
+                if (audioElement !== current) {
+                    audioElement.pause();
+                }
+            });
+        });
+    });
+</script>

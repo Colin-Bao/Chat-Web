@@ -2,11 +2,11 @@
     <thead class="thead-dark">
     <tr class="row table_top_color">
         <th class="col-1 text-center" style="padding-left: 35px;">NAME</th>
-        <th class="col-1 text-center">VOLICE</th>
-        <th class="col-1 text-center">POSITION</th>
-        <th class="col-1 text-center">Remitente</th>
-        <th class="col-3 text-center">Asunto</th>
-        <th class="col-3 text-center">Tema</th>
+        <th class="col-1 text-center">TOOL</th>
+        <th class="col-1 text-center">来源</th>
+        <th class="col-1 text-center">排名</th>
+        <th class="col-2 text-center">标签</th>
+        <th class="col-4 text-center">语音条</th>
         <th class="col-2 text-center filter-false sorter-false">ASSETS</th>
     </tr>
     </thead>
@@ -14,14 +14,21 @@
     <tr></tr>
     {% for user in users %}
         <tr class="row">
+
+            <!-- 头像、姓名、年龄 -->
             <td class="col-1 align-items-md-center justify-content-md-center d-md-flex">
                 <div style="margin-left: 30px;margin-top: 10px">
-                    <img class="rounded-circle me-2" width="80px" height="80px" style="margin-right: 0px !important;" src="{{ user.img }}">
+                    <!--头像-->
+                    <a href="{{ user.homepage }}" target="_blank"><img class="rounded-circle me-2" width="80px" height="80px" style="margin-right: 0px !important;" src="{{ user.AvatarImg }}"></a>
+                    <!--姓名-->
                     <div style="margin-top: 10px">{{ user.name }}</div>
+                    <!--年龄-->
+                    <div style="margin-top: 5px">{{ user.Age }}</div>
                 </div>
 
             </td>
 
+            <!-- 工具栏 -->
             <td class="col-1 ">
                 <p data-bs-toggle="tooltip" data-bss-tooltip="" title="Ya descargado"><i class="fas fa-check text-info"></i>
                 </p>
@@ -32,10 +39,23 @@
 
             </td>
 
-            <td class="col-1 align-items-md-center justify-content-md-center d-md-flex">{{ user.position }}</td>
-            <td class="col-1 align-items-md-center justify-content-md-center d-md-flex">{{ user.tag }}</td>
-            <td class="col-3 align-items-md-center justify-content-md-center d-md-flex">{{ user.profile }}</td>
-            <td class="col-3 align-items-md-center justify-content-md-center d-md-flex">{{ user.service }}</td>
+            <!-- 来源 -->
+            <td class="col-1 align-items-md-center justify-content-md-center d-md-flex"><a href="{{ user.website }}" target="_blank">{{ user.company }}</a></td>
+
+            <!-- 排名 -->
+            <td class="col-1 align-items-md-center justify-content-md-center d-md-flex">{{ user.rank_2 }}</td>
+
+            <!-- 标签 -->
+            <td class="col-2 align-items-md-center justify-content-md-center d-md-flex">{{ user.tag }}</td>
+
+            <!-- 语音条 -->
+            <td class="col-4 align-items-md-center justify-content-md-center d-md-flex">
+                <audio controls>
+                    <source src="{{ user.audio_url }}" type="audio/mpeg">
+                </audio>
+            </td>
+
+            <!-- 工具 -->
             <td class="col-2  align-items-md-center justify-content-md-center d-md-flex">
 
                 <a class="btn btn-dark btnMaterial btn-flat primary semicircle" role="button" data-bs-toggle="tooltip"
@@ -59,3 +79,4 @@
     {% endfor %}
     </tbody>
 {% endblock %}
+

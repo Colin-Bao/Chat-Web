@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import pandas as pd
 from faker import Faker
+import os
 
 app = Flask(__name__)
 
@@ -8,16 +9,16 @@ app = Flask(__name__)
 # 将数据导入和处理封装成一个函数
 def load_and_process_data(search_query=None):
     # 获取当前文件所在的目录
-    # ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../"))
-    # DS_PATH = f'{ROOT_PATH}/DataSets/2023-Escort'
-    df = pd.read_csv(f'/Users/colin/Library/Mobile Documents/com~apple~CloudDocs/PycharmProjects/Chat-Analysis/ScrapySpider/playwright_spider/data/user_clean.csv')
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(current_dir, 'data', 'user_clean.csv')
+    df = pd.read_csv(file_path)
 
     # 指定需要查找的列
     columns_to_search = ['name', 'Profile', 'tag']
     target_string = '萝'
 
     # 使用 apply 和 str.contains 来对指定列进行查找
-    df = df[df[columns_to_search].apply(lambda col: col.astype(str).str.contains(target_string, na=False)).any(axis=1)]
+    df = df[df[columns_to_search].apply(lambda col: col.astype(str).str.contains(target_string, na=False)).any(axis=1)].sort_values(by='rank', ascending=False)
 
     # 搜索框
     if search_query:
