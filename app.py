@@ -2,6 +2,12 @@ from flask import Flask, render_template, request
 import pandas as pd
 from faker import Faker
 import os
+import sys
+
+# 导入自定义包
+sys.path.append('/home/ubuntu/PycharmProjects/Chat-Analysis/ScrapySpider/playwright_spider')
+from config import sqlalchemy_uri  # noqa
+
 
 app = Flask(__name__)
 
