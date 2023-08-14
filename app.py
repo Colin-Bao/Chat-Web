@@ -5,7 +5,8 @@ import os
 import sys
 
 # 导入自定义包
-sys.path.append('/home/ubuntu/PycharmProjects/Chat-Analysis/ScrapySpider/playwright_spider')
+sys.path.append('/home/ubuntu/PycharmProjects/Chat-Analysis/private_config')
+sys.path.append('/home/ubuntu/PycharmProjects/Chat-Analysis/private_config')
 from config import sqlalchemy_uri  # noqa
 
 
