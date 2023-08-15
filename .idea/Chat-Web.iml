@@ -5,7 +5,7 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Remote Python 3.11.0 (sftp://ubuntu@192.168.2.13:22/home/ubuntu/miniconda3/envs/Chat-Web/bin/python)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Chat-Web" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
